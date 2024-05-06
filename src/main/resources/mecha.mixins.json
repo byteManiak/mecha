@@ -4,9 +4,9 @@
   "package": "com.bytemaniak.mecha.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "EntityMixin"
   ],
   "client": [
-    "EntityMixin",
     "EntityRenderDispatcherMixin"
   ],
   "injectors": {
