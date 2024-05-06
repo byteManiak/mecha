@@ -18,7 +18,7 @@ import java.util.function.Predicate;
 public abstract class EntityMixin {
     @WrapOperation(method = "adjustMovementForCollisions(Lnet/minecraft/util/math/Vec3d;)Lnet/minecraft/util/math/Vec3d;",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;getEntityCollisions(Lnet/minecraft/entity/Entity;Lnet/minecraft/util/math/Box;)Ljava/util/List;"))
-    private List<VoxelShape> addJumppadColliders(World world, Entity entity, Box box, Operation<List<VoxelShape>> original) {
+    private List<VoxelShape> addEntityColliders(World world, Entity entity, Box box, Operation<List<VoxelShape>> original) {
         List<VoxelShape> list = original.call(world, entity, box);
 
         if (box.getAverageSideLength() < 1.0E-7) return list;
