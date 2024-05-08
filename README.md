@@ -32,11 +32,12 @@ The following example code adds 2 colliders to an entity, each the size of a sla
 public CustomEntity extends Entity implements MultiCollidable {
     public List<VoxelShape> getColliders() {
         List<VoxelShape> colliders = new ArrayList<>();
+        BlockPos pos = this.blockPos();
         double x = pos.getX();
         double y = pos.getY();
         double z = pos.getZ();
-        colliders.add(VoxelShapes.cuboid(x, y, z, x+1, y+0.5, z+1);
-        colliders.add(VoxelShapes.cuboid(x, y+0.5, z, x+1, y+1, z+1);
+        colliders.add(VoxelShapes.cuboid(x, y, z, x+1, y+0.5, z+1));
+        colliders.add(VoxelShapes.cuboid(x, y+0.5, z, x+1, y+1, z+1));
     }
 }
 ```
