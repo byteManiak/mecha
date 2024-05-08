@@ -38,6 +38,7 @@ public CustomEntity extends Entity implements MultiCollidable {
         double z = pos.getZ();
         colliders.add(VoxelShapes.cuboid(x, y, z, x+1, y+0.5, z+1));
         colliders.add(VoxelShapes.cuboid(x, y+0.5, z, x+1, y+1, z+1));
+        return colliders;
     }
 }
 ```
