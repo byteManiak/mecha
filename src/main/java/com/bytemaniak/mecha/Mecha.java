@@ -13,11 +13,13 @@ import net.minecraft.util.Identifier;
 
 public class Mecha implements ModInitializer {
     public static EntityType<TestEntity> TEST_ENT;
+    private static final boolean DEBUG = FabricLoader.getInstance().isDevelopmentEnvironment();
+
     @Override
     public void onInitialize() {
-        if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+        if (DEBUG) {
             TEST_ENT = Registry.register(Registries.ENTITY_TYPE, new Identifier("mecha:test"),
-                    FabricEntityTypeBuilder.create(SpawnGroup.MISC, TestEntity::new).dimensions(EntityDimensions.fixed(1, 1)).build());
+                    FabricEntityTypeBuilder.create(SpawnGroup.MISC, TestEntity::new).dimensions(EntityDimensions.fixed(0, 0)).build());
         }
     }
 }

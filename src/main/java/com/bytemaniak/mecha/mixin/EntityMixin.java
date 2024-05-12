@@ -28,7 +28,7 @@ public abstract class EntityMixin {
         List<VoxelShape> newList = new ArrayList<>();
         for (Entity ent : ents) {
             List<VoxelShape> colliders = ((MultiCollidable)ent).getColliders();
-            if (!colliders.isEmpty())
+            if (colliders != null && !colliders.isEmpty())
                 newList.addAll(colliders);
         }
 
