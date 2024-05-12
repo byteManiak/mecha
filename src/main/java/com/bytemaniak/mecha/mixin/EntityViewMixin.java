@@ -23,13 +23,14 @@ public interface EntityViewMixin {
 
     /**
      * @author byteManiak
-     * @reason replace immutable list with mutable one, and add MultiCollidable colliders
+     * @reason Replace immutable list with mutable one,
+     * fix collidesWith predicate for entities that override it, and add MultiCollidable colliders.
      */
     @Overwrite
     public default List<VoxelShape> getEntityCollisions(@Nullable Entity entity, Box box) {
         if (box.getAverageSideLength() < 1.0E-7) return List.of();
 
-        Predicate<Entity> predicate = entity == null ? EntityPredicates.CAN_COLLIDE : EntityPredicates.EXCEPT_SPECTATOR.and(entity::collidesWith);
+        Predicate<Entity> predicate = entity == null ? EntityPredicates.CAN_COLLIDE : EntityPredicates.EXCEPT_SPECTATOR.and(e -> e.collidesWith(entity));
         predicate = predicate.and(e -> e instanceof MultiCollidable);
 
         List<Entity> list = this.getOtherEntities(entity, box.expand(1.0E-7), predicate);
