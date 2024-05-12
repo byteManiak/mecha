@@ -20,8 +20,8 @@ public class EntityRenderDispatcherMixin {
     private static void renderJumppadColliders(MatrixStack matrices, VertexConsumer vertices, Entity entity, float tickDelta, CallbackInfo ci) {
         if (entity instanceof MultiCollidable multiCollidable && multiCollidable.getColliders() != null) {
             List<VoxelShape> colliders = multiCollidable.getColliders();
-            if (colliders != null)
-                for (VoxelShape shape : multiCollidable.getColliders())
+            if (colliders != null && !colliders.isEmpty())
+                for (VoxelShape shape : colliders)
                     WorldRenderer.drawBox(matrices, vertices, shape.getBoundingBox().offset(-entity.getX(), -entity.getY(), -entity.getZ()), 0f, 1f, 0f, 1f);
         }
     }
