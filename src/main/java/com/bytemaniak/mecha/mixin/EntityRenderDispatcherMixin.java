@@ -12,12 +12,17 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.List;
+
 @Mixin(EntityRenderDispatcher.class)
 public class EntityRenderDispatcherMixin {
     @Inject(method = "renderHitbox", at = @At("HEAD"))
     private static void renderJumppadColliders(MatrixStack matrices, VertexConsumer vertices, Entity entity, float tickDelta, CallbackInfo ci) {
-        if (entity instanceof MultiCollidable multiCollidable)
-            for (VoxelShape shape : multiCollidable.getColliders())
-                WorldRenderer.drawBox(matrices, vertices, shape.getBoundingBox().offset(-entity.getX(), -entity.getY(), -entity.getZ()), 0f, 1f, 0f, 1f);
+        if (entity instanceof MultiCollidable multiCollidable && multiCollidable.getColliders() != null) {
+            List<VoxelShape> colliders = multiCollidable.getColliders();
+            if (colliders != null)
+                for (VoxelShape shape : multiCollidable.getColliders())
+                    WorldRenderer.drawBox(matrices, vertices, shape.getBoundingBox().offset(-entity.getX(), -entity.getY(), -entity.getZ()), 0f, 1f, 0f, 1f);
+        }
     }
 }
